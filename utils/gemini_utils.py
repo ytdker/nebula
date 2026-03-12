@@ -65,11 +65,14 @@ def analyze_cup(image: Image.Image) -> str:
         raise
     except Exception as e:
         error_msg = str(e)
+        # Hata ayıklama için terminale yazdır
+        print(f"DEBUG - Gemini Error: {error_msg}")
+        
         if "API_KEY" in error_msg.upper() or "INVALID" in error_msg.upper():
             raise ValueError(f"Geçersiz API anahtarı: {error_msg}")
-        elif "QUOTA" in error_msg.upper() or "EXHAUSTED" in error_msg.upper():
-            raise RuntimeError("API kotası doldu. Lütfen bir süre bekle.")
+        elif "QUOTA" in error_msg.upper() or "EXHAUSTED" in error_msg.upper() or "429" in error_msg:
+            raise RuntimeError(f"API kotası doldu veya çok fazla istek (429). Detay: {error_msg}")
         elif "SAFETY" in error_msg.upper():
-            raise RuntimeError("Görsel güvenlik filtresine takıldı. Farklı bir görsel dene.")
+            raise RuntimeError(f"Görsel güvenlik filtresine takıldı (Safety). Detay: {error_msg}")
         else:
-            raise RuntimeError(f"Nebula'ya ulaşılamadı: {error_msg}")
+            raise RuntimeError(f"Nebula'ya ulaşılamadı. Teknik detay: {error_msg}")
