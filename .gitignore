@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Ortam değişkenleri (gizlilik!)
+.env
+
+# Streamlit önbelleği
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+*.swp

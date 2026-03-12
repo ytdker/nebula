@@ -1,0 +1,39 @@
+# Antigravity Agent Configuration — Nebula
+
+project:
+  name: nebula
+  description: "Kozmik dark-mode Türk kahvesi falı uygulaması"
+  version: "1.0.0"
+  language: tr
+
+runtime:
+  type: python
+  version: "3.10+"
+  entry_point: app.py
+
+framework:
+  name: streamlit
+  version: ">=1.32.0"
+
+api:
+  provider: google
+  model: gemini-1.5-flash
+  purpose: "Kahve fincanı görsellerini analiz eden çok modlu model"
+
+capabilities:
+  - image_processing       # Fincan fotoğrafından şekil tespiti
+  - natural_language_generation  # Mistik Türkçe fal metni üretimi
+  - state_management       # Streamlit session_state ile sorgu geçmişi
+
+theme:
+  style: dark
+  palette: cosmic          # Uzay moru + altın aksan
+  fonts: [Cinzel, Lato]
+
+agents:
+  context_hints:
+    - "Bu bir Türk kahvesi falı uygulamasıdır, plaka dedektörü DEĞİL"
+    - "Gemini 1.5 Flash, sistem talimatı (SYSTEM_INSTRUCTION) ile çağrılır"
+    - "Arayüz tamamen Türkçedir"
+    - "Tema: kozmik / mistik / dark mode"
+    - "st.session_state['history'] ile son sorgular saklanır"
